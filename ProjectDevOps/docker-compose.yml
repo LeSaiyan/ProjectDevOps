@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:1.15
+    ports:
+      - "3000:80"
+    volumes:
+      - ./samplephpwebsite-1:/var/www/samplephpwebsite-1
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    links: 
+      - php  
+  php:
+    build:
+      context: ./php-Dockerfile
+    volumes:
+      - ./samplephpwebsite-1:/var/www/samplephpwebsite-1
